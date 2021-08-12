@@ -9,24 +9,25 @@ import {
   Button,
 } from 'react-bootstrap';
 import Rating from '../components/Rating';
-import axios from 'axios'
+import axios from 'axios';
 
-const ProductScreen = ({match}) => {
+const ProductScreen = ({ match }) => {
   const [product, setProduct] = useState({});
 
   useEffect(() => {
-    const fetchProduct= async () => {
-      const { data } = await axios.get(`/api/product/${match.params.id}`);
+    const fetchProduct = async () => {
+      const { data } = await axios.get(
+        `/api/product/${match.params.id}`
+      );
 
       setProduct(data);
     };
     fetchProduct();
-  }, [match ]);
+  }, [match]);
 
   return (
     <>
       <Link className='btn btn-dark' to='/'>
-        {' '}
         BoBack
       </Link>
       <Row>

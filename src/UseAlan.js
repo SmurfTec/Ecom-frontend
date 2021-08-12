@@ -19,22 +19,22 @@ const UseAlan = ({ history }) => {
   const opencart = useCallback(() => {
     alanInstance.playText(' opening cart ');
     history.push('/cart');
-  }, [alanInstance]);
+  }, [alanInstance,history]);
 
   const closecart = useCallback(() => {
     alanInstance.playText(' closing cart ');
     history.push('/');
-  }, [alanInstance]);
+  }, [alanInstance,history]);
 
   const loginPage = useCallback(() => {
     alanInstance.playText(' please login ');
     history.push('/login');
-  }, [alanInstance]);
+  }, [alanInstance, history]);
 
   const homePage = useCallback(() => {
     alanInstance.playText(' going to home page ');
     history.push('/');
-  }, [alanInstance]);
+  }, [alanInstance,history]);
 
   useEffect(() => {
     window.addEventListener(COMMANDS.OPEN_CART, opencart);
@@ -48,8 +48,7 @@ const UseAlan = ({ history }) => {
       window.removeEventListener(COMMANDS.LOGIN_PAGE, loginPage);
       window.removeEventListener(COMMANDS.HOME_PAGE, homePage);
     };
-    
-  }, [opencart, closecart]);
+  }, [opencart, closecart, homePage, loginPage]);
 
   useEffect(() => {
     if (alanInstance != null) return;
@@ -63,7 +62,7 @@ const UseAlan = ({ history }) => {
     );
   }, []);
 
-  return <></>;
+  return null;
 };
 
 export default withRouter(UseAlan);
