@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Row,
@@ -9,22 +9,20 @@ import {
   Button,
 } from 'react-bootstrap';
 import Rating from '../components/Rating';
-import axios from 'axios';
+import Message from '../components/Message.js';
+import Loader from '../components/Loader.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { listProductDetails } from '../actions/productAction';
 
 const ProductScreen = ({ match }) => {
-  const [product, setProduct] = useState({});
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const { data } = await axios.get(
-        `/api/product/${match.params.id}`
-      );
+    dispatch(listProductDetails(match.params.id));
+  }, [dispatch,match]);
 
-      setProduct(data);
-    };
-    fetchProduct();
-  }, [match]);
-
+  const product={}
+  
   return (
     <>
       <Link className='btn btn-dark' to='/'>
