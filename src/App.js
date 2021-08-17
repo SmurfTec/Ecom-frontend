@@ -11,6 +11,8 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShippingScreen from './screens/ShippingScreen';
+import PaymentMethodScreen from './screens/PaymentMethodScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
       <main className='py-2'>
         <Container>
           <Route path='/shipping' component={ShippingScreen} exact />
+          <Route path='/payment' component={PaymentMethodScreen} exact />
+          <Route path='/placeorder' component={PlaceOrderScreen} exact />
           <Route path='/login' component={LoginScreen} exact />
           <Route path='/register' component={RegisterScreen} exact />
           <Route path='/profile' component={ProfileScreen} exact />
