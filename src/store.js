@@ -11,6 +11,10 @@ import { userRegisterReducers } from './reducers/userReducers';
 import { userDetailReducers } from './reducers/userReducers';
 import { userUpdateProfileReducers } from './reducers/userReducers';
 import { orderCreateReducer } from './reducers/orderReducers';
+import { orderDetailsReducer } from './reducers/orderReducers';
+import { orderPayReducer } from './reducers/orderReducers';
+import { myOrderListReducer } from './reducers/orderReducers';
+
 
 const reducer = combineReducers({
   productList: productListReducers, // we acces this form the name of productList in components
@@ -20,7 +24,10 @@ const reducer = combineReducers({
   userRegister: userRegisterReducers,
   userDetails: userDetailReducers,
   userUpdateProfile: userUpdateProfileReducers,
-  orderCreate:orderCreateReducer
+  orderCreate: orderCreateReducer,
+  orderDetails: orderDetailsReducer,
+  orderPay:orderPayReducer,
+  myOrderList:myOrderListReducer
 });
 
 // and when we take this out we use JSON.parse() to parse it back to javascripts
