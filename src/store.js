@@ -6,28 +6,40 @@ import {
   productDetailsReducers,
 } from './reducers/productListReducers';
 import { cartReducer } from './reducers/cartReducer';
-import { userLoginReducers } from './reducers/userReducers';
-import { userRegisterReducers } from './reducers/userReducers';
-import { userDetailReducers } from './reducers/userReducers';
-import { userUpdateProfileReducers } from './reducers/userReducers';
-import { orderCreateReducer } from './reducers/orderReducers';
-import { orderDetailsReducer } from './reducers/orderReducers';
-import { orderPayReducer } from './reducers/orderReducers';
-import { myOrderListReducer } from './reducers/orderReducers';
-
-
+import {
+  userLoginReducers,
+  userRegisterReducers,
+  userUpdateProfileReducers,
+  userDetailReducers,
+  userListReducer,
+  userDeleteReducer,
+  userUpdateReducer
+} from './reducers/userReducers';
+import {
+  orderCreateReducer,
+  orderDetailsReducer,
+  orderPayReducer,
+  myOrderListReducer,
+} from './reducers/orderReducers';
+ 
 const reducer = combineReducers({
   productList: productListReducers, // we acces this form the name of productList in components
   productDetails: productDetailsReducers,
   cart: cartReducer,
+  
   userLogin: userLoginReducers,
   userRegister: userRegisterReducers,
   userDetails: userDetailReducers,
   userUpdateProfile: userUpdateProfileReducers,
+  userList: userListReducer,
+  userDelete:userDeleteReducer,
+  userUpdate:userUpdateReducer,
+
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
-  orderPay:orderPayReducer,
-  myOrderList:myOrderListReducer
+  orderPay: orderPayReducer,
+  myOrderList: myOrderListReducer,
+
 });
 
 // and when we take this out we use JSON.parse() to parse it back to javascripts
