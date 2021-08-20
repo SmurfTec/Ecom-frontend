@@ -4,6 +4,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   productListReducers,
   productDetailsReducers,
+  productDeleteReducers,
+  productCreateReducers,
+  productUpdateReducers
 } from './reducers/productListReducers';
 import { cartReducer } from './reducers/cartReducer';
 import {
@@ -13,7 +16,7 @@ import {
   userDetailReducers,
   userListReducer,
   userDeleteReducer,
-  userUpdateReducer
+  userUpdateReducer,
 } from './reducers/userReducers';
 import {
   orderCreateReducer,
@@ -21,25 +24,27 @@ import {
   orderPayReducer,
   myOrderListReducer,
 } from './reducers/orderReducers';
- 
+
 const reducer = combineReducers({
   productList: productListReducers, // we acces this form the name of productList in components
   productDetails: productDetailsReducers,
+  productDelete: productDeleteReducers,
+  productCreate: productCreateReducers,
+  productUpdate:productUpdateReducers,
   cart: cartReducer,
-  
+
   userLogin: userLoginReducers,
   userRegister: userRegisterReducers,
   userDetails: userDetailReducers,
   userUpdateProfile: userUpdateProfileReducers,
   userList: userListReducer,
-  userDelete:userDeleteReducer,
-  userUpdate:userUpdateReducer,
+  userDelete: userDeleteReducer,
+  userUpdate: userUpdateReducer,
 
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   myOrderList: myOrderListReducer,
-
 });
 
 // and when we take this out we use JSON.parse() to parse it back to javascripts
