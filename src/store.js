@@ -6,7 +6,7 @@ import {
   productDetailsReducers,
   productDeleteReducers,
   productCreateReducers,
-  productUpdateReducers
+  productUpdateReducers,
 } from './reducers/productListReducers';
 import { cartReducer } from './reducers/cartReducer';
 import {
@@ -23,6 +23,8 @@ import {
   orderDetailsReducer,
   orderPayReducer,
   myOrderListReducer,
+  orderListReducer,
+  orderDeliverReducer,
 } from './reducers/orderReducers';
 
 const reducer = combineReducers({
@@ -30,7 +32,7 @@ const reducer = combineReducers({
   productDetails: productDetailsReducers,
   productDelete: productDeleteReducers,
   productCreate: productCreateReducers,
-  productUpdate:productUpdateReducers,
+  productUpdate: productUpdateReducers,
   cart: cartReducer,
 
   userLogin: userLoginReducers,
@@ -45,6 +47,8 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   myOrderList: myOrderListReducer,
+  orderList: orderListReducer,
+  orderDeliver:orderDeliverReducer
 });
 
 // and when we take this out we use JSON.parse() to parse it back to javascripts
