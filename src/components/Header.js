@@ -1,8 +1,15 @@
 import React from 'react';
-import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Route } from 'react-router-dom';
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../actions/userAction';
+import SearchBox from './SearchBox';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -18,13 +25,22 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg='dark' expand='lg' variant='dark' collapseOnSelect>
+      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>Shopcom</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='navbarScroll'>
+          <Navbar.Collapse id='basic-navbar-nav'>
+            
+            {/* SearchBox */}
+            
+            <Route
+              render={({ history }) => (
+                <SearchBox history={history} />
+              )}
+            />
+
             <Nav className='ml-auto'>
               <LinkContainer to='/cart'>
                 <Nav.Link>

@@ -35,8 +35,8 @@ const App = () => {
             path='/admin/orderlist'
             component={OrderListScreen}
           />
-          <Route path='/login' component={LoginScreen} exact />
-          <Route path='/register' component={RegisterScreen} exact />
+          <Route path='/login' component={LoginScreen} />
+          <Route path='/register' component={RegisterScreen} />
           <Route path='/profile' component={ProfileScreen} />
           <Route path='/product/:id' component={ProductScreen} />
           <Route path='/cart/:id?' component={CartScreen} />
@@ -54,6 +54,7 @@ const App = () => {
             component={ProductEditScreen}
           />
           <Route path='/' component={HomeScreen} exact />
+          <Route path='/search/:keyword' component={HomeScreen} />
         </Container>
       </main>
       <Footer />

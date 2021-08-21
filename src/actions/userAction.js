@@ -48,6 +48,7 @@ export const login = (email, password) => async (dispatch) => {
     });
 
     localStorage.setItem('userInfo', JSON.stringify(data));
+
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -75,8 +76,7 @@ export const logout = () => async (dispatch) => {
   });
 };
 
-export const register =
-  (name, email, password) => async (dispatch) => {
+export const register =(name, email, password) => async (dispatch) => {
     try {
       dispatch({
         type: USER_REGISTER_REQUEST,
@@ -100,7 +100,9 @@ export const register =
         type: USER_LOGIN_SUCCESS,
         payload: data,
       });
+      
       localStorage.setItem('userInfo', JSON.stringify(data));
+
     } catch (error) {
       dispatch({
         type: USER_REGISTER_FAIL,

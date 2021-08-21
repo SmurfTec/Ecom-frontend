@@ -14,6 +14,9 @@ import {
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
   PRODUCT_UPDATE_FAIL,
+  PRODUCT_CREATE_REVIEW_REQUEST,
+  PRODUCT_CREATE_REVIEW_SUCCESS,
+  PRODUCT_CREATE_REVIEW_FAIL,
 } from '../constants/productConstants';
 
 import axios from 'axios';
@@ -22,11 +25,11 @@ import axios from 'axios';
 // redux-thunk help us in async-request
 // basically thunk add a fun in fun
 
-export const listProducts = () => async (dispatch) => {
+export const listProducts = (keyword='') => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST }); // dispatch request basically it goes to product reducer and set loading:true and products:[]
 
-    const { data } = await axios.get('/api/products');
+    const { data } = await axios.get(`/api/products?keyword=${keyword}`);
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -110,33 +113,64 @@ export const createProduct = () => async (dispatch, getState) => {
   }
 };
 
-export const updateProduct = (product) => async (dispatch, getState) => {
-  try {
-    dispatch({ type: PRODUCT_UPDATE_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
+export const updateProduct =
+  (product) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: PRODUCT_UPDATE_REQUEST });
+      const {
+        userLogin: { userInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
 
-    const { data } = await axios.put(
-      `/api/products/${product._id}`,
-      product,
-      config
-    );
-    dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: PRODUCT_UPDATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+      const { data } = await axios.put(
+        `/api/products/${product._id}`,
+        product,
+        config
+      );
+      dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+export const createProductReview =
+  (productId, review) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: PRODUCT_CREATE_REVIEW_REQUEST });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      await axios.post(`/api/products/${productId}/review`,review, config);
+      dispatch({
+        type: PRODUCT_CREATE_REVIEW_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_CREATE_REVIEW_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };

@@ -9,7 +9,10 @@ import { listProducts } from '../actions/productAction';
 // useDispatch => use to dispatch our calling action
 // useSelector => used to select the part of state e.g
 
-const HomeScreen = () => {
+const HomeScreen = ({match}) => {
+  const keyword=match.params.keyword
+
+
   const dispatch = useDispatch();
 
   //  grab data from the state and pull out what we need
@@ -17,8 +20,8 @@ const HomeScreen = () => {
   const { loading, error, products } = productList;
 
   useEffect(() => {
-    dispatch(listProducts()); // firing of the action to get the data through the reducer down into the state
-  }, [dispatch]);
+    dispatch(listProducts(keyword)); // firing of the action to get the data through the reducer down into the state
+  }, [dispatch,keyword]);
 
   return (
     <>
