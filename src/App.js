@@ -44,7 +44,14 @@ const App = () => {
           <Route
             path='/admin/productlist'
             component={ProductListScreen}
+            exact
           />
+          <Route
+            path='/admin/productlist/:pageNumber'
+            component={ProductListScreen}
+            exact
+          />
+
           <Route
             path='/admin/user/:id/edit'
             component={UserEditScreen}
@@ -53,8 +60,22 @@ const App = () => {
             path='/admin/product/:id/edit'
             component={ProductEditScreen}
           />
+          <Route
+            path='/search/:keyword'
+            component={HomeScreen}
+            exact
+          />
+          <Route
+            path='/page/:pageNumber'
+            component={HomeScreen}
+            exact
+          />
+          <Route
+            path='/search/:keyword/page/:pageNumber'
+            component={HomeScreen}
+            exact
+          />
           <Route path='/' component={HomeScreen} exact />
-          <Route path='/search/:keyword' component={HomeScreen} />
         </Container>
       </main>
       <Footer />

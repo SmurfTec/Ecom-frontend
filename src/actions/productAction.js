@@ -17,6 +17,9 @@ import {
   PRODUCT_CREATE_REVIEW_REQUEST,
   PRODUCT_CREATE_REVIEW_SUCCESS,
   PRODUCT_CREATE_REVIEW_FAIL,
+  PRODUCT_TOP_REQUEST,
+  PRODUCT_TOP_SUCCESS,
+  PRODUCT_TOP_FAIL,
 } from '../constants/productConstants';
 
 import axios from 'axios';
@@ -25,11 +28,12 @@ import axios from 'axios';
 // redux-thunk help us in async-request
 // basically thunk add a fun in fun
 
-export const listProducts = (keyword='') => async (dispatch) => {
+export const listProducts = (keyword='',pageNumber='') => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST }); // dispatch request basically it goes to product reducer and set loading:true and products:[]
 
-    const { data } = await axios.get(`/api/products?keyword=${keyword}`);
+    // console.log('PAGENUMBER',pageNumber)
+    const { data } = await axios.get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`);
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -167,6 +171,24 @@ export const createProductReview =
     } catch (error) {
       dispatch({
         type: PRODUCT_CREATE_REVIEW_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+  export const listTopProducts = () => async (dispatch) => {
+    try {
+      dispatch({ type: PRODUCT_TOP_REQUEST});
+
+      const { data } = await axios.get(`/api/products/topProducts`);
+
+      dispatch({ type: PRODUCT_TOP_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_TOP_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
